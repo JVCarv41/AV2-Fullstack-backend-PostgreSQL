@@ -10,6 +10,7 @@ router.post('/register', validateRegister, async (req, res) => {
     const user = await authController.register(name, email, password);
     res.status(201).json({ message: 'Usuario cadastrado com sucesso', user });
   } catch (error) {
+    console.error(error.message);
     res.status(400).json({ error: error.message });
   }
 });
@@ -22,6 +23,7 @@ router.post('/login', validateLogin, async (req, res) => {
     const token = await authController.login(email, password);
     res.status(200).json({ message: 'Login com sucesso', token });
   } catch (error) {
+    console.error(error.message);
     res.status(400).json({ error: error.message });
   }
 });
