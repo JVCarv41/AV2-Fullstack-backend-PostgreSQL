@@ -5,5 +5,6 @@
   ],
   "routes": [
     { "src": "/api/(.*)", "dest": "/src/app.js" }
-  ]
+  ],
+  "installCommand": "npm install"
 }
