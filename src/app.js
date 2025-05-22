@@ -36,10 +36,6 @@ const startServer = async () => {
   try {
     await sequelize.sync(); // Sync models to DB
     console.log('PostgreSQL & Sequelize connected and synced');
-    // If you start your server here:
-    // app.listen(process.env.PORT || 3000, () => {
-    //   console.log('Server started');
-    // });
   } catch (error) {
     console.error('Failed to sync Sequelize:', error);
     process.exit(1);
