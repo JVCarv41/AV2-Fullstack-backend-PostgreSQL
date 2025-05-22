@@ -19,16 +19,16 @@ const User = sequelize.define('User', {
   password: {
     type: DataTypes.STRING,
     allowNull: false,
-    // We'll handle hiding password manually when returning user data
   },
 }, {
+  tableName: 'users',
   timestamps: true,
   defaultScope: {
-    attributes: { exclude: ['password'] }, // Equivalent to `select: false`
+    attributes: { exclude: ['password'] },
   },
   scopes: {
     withPassword: {
-      attributes: {}, // include all attributes
+      attributes: {},
     },
   },
 });

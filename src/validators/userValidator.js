@@ -4,7 +4,7 @@ function validateEmail(email) {
   }
   
   function validatePassword(password) {
-    // Example rule: min 6 chars, at least one number
+    // Rule: min 6 chars, at least one number
     const passwordRegex = /^(?=.*\d).{6,}$/;
     return passwordRegex.test(password);
   }

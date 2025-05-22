@@ -2,13 +2,10 @@ const express = require('express');
 const dotenv = require('dotenv');
 dotenv.config();
 const cors = require('cors');
-
-// Import Sequelize instance
-const { sequelize } = require('./database/sequelize'); // Your Sequelize init file
+const { connectDB } = require('./database/sequelize'); // Import the connection function
 
 const authRoutes = require('./routes/authRoutes');
 const protectedRoutes = require('./routes/protectedRoutes');
-
 
 const app = express();
 
@@ -22,26 +19,20 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('/api/test', (req, res) => {
-  console.log('Test route handler reached');
-  res.json({ message: 'Test route is working!' });
+// Initialize database connection
+connectDB().then(() => {
+  console.log('Database connection established');
+}).catch(err => {
+  console.error('Database connection failed', err);
 });
 
 // Routes
+app.get('/api/test', (req, res) => {
+  console.log("Test route succefully reached")
+  res.json({ message: 'Test route is working!' });
+});
+
 app.use('/api', authRoutes);
 app.use('/api', protectedRoutes);
-
-// Sync Sequelize and then start server (if you start server here)
-const startServer = async () => {
-  try {
-    await sequelize.sync(); // Sync models to DB
-    console.log('PostgreSQL & Sequelize connected and synced');
-  } catch (error) {
-    console.error('Failed to sync Sequelize:', error);
-    process.exit(1);
-  }
-};
-
-startServer();
 
 module.exports = app;

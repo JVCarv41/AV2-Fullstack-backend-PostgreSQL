@@ -6,7 +6,6 @@ const { validateRegister, validateLogin } = require('../middlewares/validateUser
 router.post('/register', validateRegister, async (req, res) => {
   console.log('Route de registro de usuario');
   const { name, email, password } = req.body;
-
   try {
     const user = await authController.register(name, email, password);
     res.status(201).json({ message: 'Usuario cadastrado com sucesso', user });
